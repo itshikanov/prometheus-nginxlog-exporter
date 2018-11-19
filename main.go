@@ -27,9 +27,12 @@ import (
 	"github.com/martin-helmich/prometheus-nginxlog-exporter/config"
 	"github.com/martin-helmich/prometheus-nginxlog-exporter/discovery"
 	"github.com/martin-helmich/prometheus-nginxlog-exporter/relabeling"
-	"github.com/martin-helmich/prometheus-nginxlog-exporter/tail"
+	//"github.com/martin-helmich/prometheus-nginxlog-exporter/tail"
+	"github.com/itshikanov/prometheus-nginxlog-exporter/tail"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/satyrius/gonx"
+	"strings"
+	"strconv"
 )
 
 // Metrics is a struct containing pointers to all metrics that should be
@@ -50,6 +53,12 @@ func (m *Metrics) Init(cfg *config.NamespaceConfig) {
 
 	labels := cfg.OrderedLabelNames
 
+	HistogramStep_Bucket_arr := []float64{}
+	for _ , num := range strings.Split(cfg.HistogramStep, " "){
+		feetFloat, _ := strconv.ParseFloat(num, 64)
+		HistogramStep_Bucket_arr = append(HistogramStep_Bucket_arr, feetFloat)
+	}
+    fmt.Println(HistogramStep_Bucket_arr)
 	for _, r := range relabeling.DefaultRelabelings {
 		labels = append(labels, r.TargetLabel)
 	}
@@ -80,6 +89,7 @@ func (m *Metrics) Init(cfg *config.NamespaceConfig) {
 		Namespace: cfg.Name,
 		Name:      "http_upstream_time_seconds_hist",
 		Help:      "Time needed by upstream servers to handle requests",
+		Buckets:   HistogramStep_Bucket_arr,
 	}, labels)
 
 	m.responseSeconds = prometheus.NewSummaryVec(prometheus.SummaryOpts{
@@ -92,6 +102,7 @@ func (m *Metrics) Init(cfg *config.NamespaceConfig) {
 		Namespace: cfg.Name,
 		Name:      "http_response_time_seconds_hist",
 		Help:      "Time needed by NGINX to handle requests",
+		Buckets:   HistogramStep_Bucket_arr,
 	}, labels)
 
 	m.parseErrorsTotal = prometheus.NewCounter(prometheus.CounterOpts{
@@ -110,6 +121,7 @@ func (m *Metrics) Init(cfg *config.NamespaceConfig) {
 }
 
 func main() {
+
 	var opts config.StartupFlags
 	var cfg = config.Config{
 		Listen: config.ListenConfig{
@@ -118,6 +130,7 @@ func main() {
 		},
 	}
 
+	flag.StringVar(&opts.HistogramStep, "histogramstep", ".005 .01 .02 .03 .04 .05 .1 .25 .5 1 2.5 5 10", "histogramstep")
 	flag.IntVar(&opts.ListenPort, "listen-port", 4040, "HTTP port to listen on")
 	flag.StringVar(&opts.Format, "format", `$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$http_x_forwarded_for"`, "NGINX access log format")
 	flag.StringVar(&opts.Namespace, "namespace", "nginx", "namespace to use for metric names")
@@ -144,6 +157,10 @@ func main() {
 
 	for _, ns := range cfg.Namespaces {
 		fmt.Printf("starting listener for namespace %s\n", ns.Name)
+
+		if len(ns.HistogramStep) < 1 {
+			ns.HistogramStep = ".005 .01 .02 .03 .04 .05 .1 .25 .5 1 2.5 5 10"
+		}
 
 		go processNamespace(ns)
 	}

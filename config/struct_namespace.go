@@ -12,6 +12,7 @@ type NamespaceConfig struct {
 	Format         string            `hcl:"format"`
 	Labels         map[string]string `hcl:"labels"`
 	RelabelConfigs []RelabelConfig   `hcl:"relabel" yaml:"relabel_configs"`
+	HistogramStep  string            `hcl:"histogramstep"`
 
 	OrderedLabelNames  []string
 	OrderedLabelValues []string

@@ -9,6 +9,7 @@ type StartupFlags struct {
 	Namespace                  string
 	ListenPort                 int
 	EnableExperimentalFeatures bool
+	HistogramStep              string
 }
 
 // Config models the application's configuration

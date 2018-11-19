@@ -12,6 +12,7 @@ func LoadConfigFromFlags(config *Config, flags *StartupFlags) error {
 			Format:      flags.Format,
 			SourceFiles: flags.Filenames,
 			Name:        flags.Namespace,
+			HistogramStep: flags.HistogramStep,
 		},
 	}
 

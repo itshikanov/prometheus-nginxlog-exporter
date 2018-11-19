@@ -1,22 +1,28 @@
 module github.com/martin-helmich/prometheus-nginxlog-exporter
 
 require (
-	github.com/beorn7/perks v0.0.0-20160229213445-3ac7bf7a47d1
-	github.com/davecgh/go-spew v1.1.0
-	github.com/golang/protobuf v0.0.0-20160614223140-0c1f6d65b5a1
-	github.com/hashicorp/consul v0.0.0-20150921174127-de080672fee9
-	github.com/hashicorp/hcl v0.0.0-20161028233240-8fa153c5b4e9
+	github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973
+	github.com/davecgh/go-spew v1.1.1
+	github.com/golang/protobuf v1.2.0
+	github.com/hashicorp/consul v1.4.0
+	github.com/hashicorp/go-cleanhttp v0.5.0 // indirect
+	github.com/hashicorp/go-rootcerts v0.0.0-20160503143440-6bb64b370b90 // indirect
+	github.com/hashicorp/hcl v1.0.0
+	github.com/hashicorp/serf v0.8.1 // indirect
 	github.com/hpcloud/tail v1.0.0
+	github.com/itshikanov/prometheus-nginxlog-exporter v1.2.0
 	github.com/matttproud/golang_protobuf_extensions v1.0.1
+	github.com/mitchellh/mapstructure v1.1.2 // indirect
 	github.com/pmezard/go-difflib v1.0.0
-	github.com/prometheus/client_golang v0.0.0-20160916180340-5636dc67ae77
-	github.com/prometheus/client_model v0.0.0-20150212101744-fa8ad6fec335
-	github.com/prometheus/common v0.0.0-20160623151427-4402f4e5ea79
-	github.com/prometheus/procfs v0.0.0-20160411190841-abf152e5f3e9
+	github.com/prometheus/client_golang v0.9.1
+	github.com/prometheus/client_model v0.0.0-20180712105110-5c3871d89910
+	github.com/prometheus/common v0.0.0-20181113130724-41aa239b4cce
+	github.com/prometheus/procfs v0.0.0-20181005140218-185b4288413d
 	github.com/satyrius/gonx v1.3.1-0.20180709120835-47c52b995fe5
-	github.com/stretchr/testify v1.2.0
-	golang.org/x/sys v0.0.0-20161023150541-c200b10b5d5e
-	gopkg.in/fsnotify.v1 v1.3.0
+	github.com/stretchr/testify v1.2.2
+	golang.org/x/sys v0.0.0-20181107165924-66b7b1311ac8
+	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
+	gopkg.in/fsnotify.v1 v1.4.7
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7
-	gopkg.in/yaml.v2 v2.0.0-20180104195722-0e4404da7122
+	gopkg.in/yaml.v2 v2.2.1
 )
