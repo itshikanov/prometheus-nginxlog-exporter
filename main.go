@@ -24,9 +24,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/martin-helmich/prometheus-nginxlog-exporter/config"
-	"github.com/martin-helmich/prometheus-nginxlog-exporter/discovery"
-	"github.com/martin-helmich/prometheus-nginxlog-exporter/relabeling"
+	"github.com/itshikanov/prometheus-nginxlog-exporter/config"
+	"github.com/itshikanov/prometheus-nginxlog-exporter/discovery"
+	"github.com/itshikanov/prometheus-nginxlog-exporter/relabeling"
 	//"github.com/martin-helmich/prometheus-nginxlog-exporter/tail"
 	"github.com/itshikanov/prometheus-nginxlog-exporter/tail"
 	"github.com/prometheus/client_golang/prometheus"
