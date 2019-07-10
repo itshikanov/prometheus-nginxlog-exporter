@@ -130,7 +130,7 @@ func main() {
 		},
 	}
 
-	flag.StringVar(&opts.HistogramStep, "histogramstep", ".005 .01 .02 .03 .04 .05 .1 .25 .5 1 2.5 5 10", "histogramstep")
+	flag.StringVar(&opts.HistogramStep, "histogramstep", ".005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10", "histogramstep")
 	flag.IntVar(&opts.ListenPort, "listen-port", 4040, "HTTP port to listen on")
 	flag.StringVar(&opts.Format, "format", `$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" "$http_x_forwarded_for"`, "NGINX access log format")
 	flag.StringVar(&opts.Namespace, "namespace", "nginx", "namespace to use for metric names")
@@ -159,7 +159,7 @@ func main() {
 		fmt.Printf("starting listener for namespace %s\n", ns.Name)
 
 		if len(ns.HistogramStep) < 1 {
-			ns.HistogramStep = ".005 .01 .02 .03 .04 .05 .1 .25 .5 1 2.5 5 10"
+			ns.HistogramStep = ".005, .01, .025, .05, .1, .25, .5, 1, 2.5, 5, 10"
 		}
 
 		go processNamespace(ns)
